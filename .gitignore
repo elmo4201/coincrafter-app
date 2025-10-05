@@ -1,2 +1,31 @@
 # Google App Engine generated folder
 appengine-generated/
+mkdir coincrafter-backend
+cd coincrafter-backend
+npm init -y
+npm install express mongoose bcryptjs jsonwebtoken cors dotenv
+coincrafter-backend/
+  |-- models/
+  |-- routes/
+  |-- controllers/
+  |-- .env
+  |-- server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.log(err));
+
+// Import routes here (to be built)
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
